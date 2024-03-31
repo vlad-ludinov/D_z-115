@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from secondproject.shopapp.models import Client
+from ...models import Client
 
 
 class Command(BaseCommand):
@@ -7,4 +7,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         clients = Client.objects.all()
-        self.stdout.write(clients)
+        for client in clients:
+            client.delete()
+        self.stdout.write(f"Clients delete")
